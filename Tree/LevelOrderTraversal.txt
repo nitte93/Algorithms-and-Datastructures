@@ -1,0 +1,44 @@
+#include <iostream>
+#include <queue>
+using namespace std;
+ 
+struct node{
+	int data;
+	struct node* left;
+	struct node* right;
+};
+ 
+struct node* makeNode(int data){
+	struct node* temp = new struct node;
+	temp->data = data;
+	temp->left = NULL;
+	temp->right = NULL;
+ 
+	return temp;
+}
+void levelOrderTraversal(struct node* root){
+	queue<struct node*> myQueue;
+	myQueue.push(root);
+	while(!myQueue.empty()){
+		cout<<myQueue.front()->data;
+		if(myQueue.front()->left != NULL){myQueue.push(myQueue.front()->left);}
+		if(myQueue.front()->left != NULL){myQueue.push(myQueue.front()->right);}
+		myQueue.pop();
+ 
+	}
+}
+int main() {
+	// your code goes here
+	struct node* root = makeNode(5);
+	root->left = makeNode(3);
+	root->right = makeNode(7);
+	root->left->left = makeNode(2);
+	root->left->right = makeNode(4);
+	root->right->right = makeNode(8);
+	root->right->left = makeNode(6);
+	root->right->right->right = makeNode(9);
+	root->right->right->right->right = makeNode(10);
+	root->right->right->right->right->right = makeNode(11);
+	levelOrderTraversal(root);
+	return 0;
+}

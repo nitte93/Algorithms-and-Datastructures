@@ -1,0 +1,37 @@
+#include <iostream>
+#include <vector>
+#include <stack>
+using namespace std;
+ 
+vector<int> graph[50]; //Assuming that max nodes in the given graph in not more than 50
+vector<int> visited(50, 0);
+stack<int> myStack;
+void topologicalSort(int n){
+	visited[n] = 1;
+	for(int i=0; i<graph[n].size(); i++){
+		if(!visited[graph[n][i]]){
+		topologicalSort(graph[n][i]);
+		}
+	}
+	myStack.push(n);
+}
+int main() {
+	// your code goes here
+	int N; // N here is no of edges
+	cin>>N;
+	int u,v;
+	for(int i=0; i<N; i++){
+		cin>>u>>v;
+		graph[u].push_back(v);
+	}
+	for(int i=0; i<6; i++){ // 6 is the max number of vertices
+		if(!visited[i]){
+			topologicalSort(i);					
+		}
+	}
+	while(!myStack.empty()){
+		cout<<myStack.top();
+		myStack.pop();
+	}
+	return 0;
+}

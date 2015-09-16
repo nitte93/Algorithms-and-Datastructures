@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+ 
+struct node{
+	int data;
+	struct node* left;
+	struct node* right;
+};
+ 
+struct node* makeNode(int data){
+	struct node* temp = new struct node;
+	temp->data = data;
+	temp->left = NULL;
+	temp->right = NULL;
+ 
+	return temp;
+}
+ 
+int height(struct node* root){
+	if(root == NULL){
+		return 0;
+	}
+	return max(height(root->left), height(root->right)) + 1;
+}
+int main() {
+	// your code goes here
+		// your code goes here
+	struct node* root = makeNode(5);
+	root->left = makeNode(3);
+	root->right = makeNode(7);
+	root->left->left = makeNode(2);
+	root->left->right = makeNode(4);
+	root->right->right = makeNode(8);
+	root->right->left = makeNode(6);
+	root->right->right->right = makeNode(9);
+	root->right->right->right->right = makeNode(10);
+	root->right->right->right->right->right = makeNode(12);
+	cout<<"Height\n";
+	cout<<height(root);
+	return 0;
+}
